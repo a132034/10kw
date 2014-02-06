@@ -3,11 +3,12 @@ package com.masterpiecesoft.tenkw.layout;
 import com.masterpiecesoft.tenkw.etc.*;
 
 import com.masterpiecesoft.tenkw.R;
-import com.masterpiecesoft.tenkw.R.layout;
-import com.masterpiecesoft.tenkw.R.menu;
 
 import android.os.Bundle;
+import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -30,10 +31,16 @@ public class MainActivity extends Activity {
 	//for debug
 	private static final String TAG = "10kw";
 	
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		// mainActivity가 실행되면 startActivity를 통해 LoadingActivity가 시작됨
+		startActivity(new Intent(this, LoadingActivity.class));
+		
 		setContentView(R.layout.activity_main);
+		final ActionBar actionBar = getActionBar();
 	}
 
 	@Override

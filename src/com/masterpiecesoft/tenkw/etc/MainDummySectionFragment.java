@@ -1,8 +1,8 @@
 package com.masterpiecesoft.tenkw.etc;
 
 import com.masterpiecesoft.tenkw.R;
+import com.masterpiecesoft.tenkw.layout.GroupActivity;
 
-import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -33,7 +33,7 @@ public class MainDummySectionFragment extends Fragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				startActivity(new Intent(getActivity(), TabActivity.class));
+				startActivity(new Intent(getActivity(), GroupActivity.class));
 				// team layout(tab activity)
 			}
 		});

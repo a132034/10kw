@@ -5,8 +5,8 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="9"
-        android:targetSdkVersion="15" />
+        android:minSdkVersion="10"
+        android:targetSdkVersion="18" />
 
     <!-- phone info. - group -->
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -27,6 +27,14 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.masterpiecesoft.tenkw.layout.GroupActivity"
+            android:label="@string/title_activity_group" >
+        </activity>
+        <activity
+            android:name="com.masterpiecesoft.tenkw.layout.LoadingActivity"
+            android:label="@string/title_activity_loading" >
         </activity>
     </application>
 
