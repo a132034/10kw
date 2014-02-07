@@ -36,6 +36,14 @@
             android:name="com.masterpiecesoft.tenkw.layout.LoadingActivity"
             android:label="@string/title_activity_loading" >
         </activity>
+        <activity
+            android:name="com.masterpiecesoft.tenkw.layout.CreateGroupActivity"
+            android:label="@string/title_activity_create_group" >
+        </activity>
+        <activity
+            android:name="com.masterpiecesoft.tenkw.layout."
+            android:label="@string/title_activity_loading" >
+        </activity>
     </application>
 
 </manifest>
