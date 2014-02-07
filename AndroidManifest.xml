@@ -11,7 +11,12 @@
     <!-- phone info. - group -->
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     
-    
+    <!-- gps speed check -->
+    <uses-permission android:name="android.permission.INTERNET" /> 
+	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     
     
     <application
@@ -41,9 +46,11 @@
             android:label="@string/title_activity_create_group" >
         </activity>
         <activity
-            android:name="com.masterpiecesoft.tenkw.layout."
-            android:label="@string/title_activity_loading" >
+            android:name="com.masterpiecesoft.tenkw.layout.JoinActivity"
+            android:label="@string/title_activity_join" 
+            android:theme="@android:style/Theme.Black.NoTitleBar">
         </activity>
+        
     </application>
 
 </manifest>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+<RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <ImageView
+            android:id="@+id/join_join_imageview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/ic_launcher" />
+
+        <EditText
+            android:id="@+id/join_name_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+			android:layout_below="@+id/join_join_imageview"
+            android:layout_marginRight="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="name"
+            android:inputType="text"
+            android:singleLine="true" />
+        <requestFocus />
+        <EditText
+            android:id="@+id/join_pw_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/join_name_editText"
+            android:layout_below="@+id/join_name_editText"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="password"
+            android:inputType="textPassword"
+            android:singleLine="true" />
+        
+        <EditText
+            android:id="@+id/join_pw2_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/join_pw_editText"
+            android:layout_below="@+id/join_pw_editText"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="password"
+            android:inputType="textPassword"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/join_email_editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/join_pw2_editText"
+            android:layout_alignRight="@+id/join_pw2_editText"
+            android:layout_below="@+id/join_pw2_editText"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="e-mail"
+            android:inputType="textEmailAddress"
+            android:singleLine="true" >          
+        </EditText>
+
+        <EditText
+            android:id="@+id/join_phone_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+ 			android:layout_alignLeft="@+id/join_email_editText"
+            android:layout_alignRight="@+id/join_email_editText"
+            android:layout_below="@+id/join_email_editText"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="Phone"
+            android:inputType="text"
+            android:singleLine="true" >
+        </EditText>
+			
+			
+        <ImageButton
+            android:id="@+id/join_ok_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/join_phone_editText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="OK" 
+            android:src="@drawable/ic_launcher"/>
+ 
+    </RelativeLayout>
+</LinearLayout>

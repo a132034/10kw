@@ -6,6 +6,7 @@
     <string name="title_activity_loading">Loading</string>
     <string name="title_activity_group">Group Page</string>
     <string name="title_activity_create_group">Create Group</string>
+    <string name="title_activity_join">Join</string>
     
     <string name="drawer_open">drawer_open</string>
     <string name="drawer_close">drawer_close</string>
