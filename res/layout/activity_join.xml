@@ -15,7 +15,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="15dp"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/icon_gold" />
 
         <EditText
             android:id="@+id/join_name_editText"

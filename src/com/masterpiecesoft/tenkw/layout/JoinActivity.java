@@ -9,8 +9,8 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class JoinActivity extends Activity{
@@ -34,7 +34,7 @@ public class JoinActivity extends Activity{
 		final EditText username = (EditText) findViewById(R.id.join_name_editText);
 		final EditText userpasswd = (EditText) findViewById(R.id.join_pw_editText);
 		final EditText userpasswd2 = (EditText) findViewById(R.id.join_pw2_editText);
-		final Button ok_btn = (Button) findViewById(R.id.join_ok_button);
+		final ImageButton ok_btn = (ImageButton) findViewById(R.id.join_ok_button);
 		
 		ok_btn.setOnClickListener(new OnClickListener() {
 			
@@ -46,7 +46,7 @@ public class JoinActivity extends Activity{
 				user_pw = userpasswd.getText().toString();
 				user_pw2 = userpasswd2.getText().toString();
 				
-				if(user_pw.equals(user_pw2)){ // password 불일치
+				if(!user_pw.equals(user_pw2)){ // password 불일치
 					tst = Toast.makeText(getApplicationContext(),
 							"비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT);
 					tst.setGravity(Gravity.CENTER, 22, 44);
