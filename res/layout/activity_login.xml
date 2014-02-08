@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+<RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        <requestFocus />
+			
+			
+        
+        <ImageView
+            android:id="@+id/login_imageview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:src="@drawable/ic_launcher" />
+        
+        <EditText
+            android:id="@+id/login_phone_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/login_imageview"
+            android:layout_alignRight="@+id/login_pw_editText"
+            android:layout_alignLeft="@+id/login_pw_editText"
+            android:layout_marginTop="30dp"
+            android:ems="10"
+            android:hint="phone"
+            android:inputType="phone"
+            android:singleLine="true" />
+        
+        <EditText
+            android:id="@+id/login_pw_editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/login_phone_editText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:ems="10"
+            android:hint="password"
+            android:inputType="textPassword"
+            android:singleLine="true" />
+
+        <ImageButton
+            android:id="@+id/login_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/login_pw_editText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="login" 
+            android:src="@drawable/ic_launcher"/>
+
+        <ImageButton 
+            android:id="@+id/join_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            android:text="10KiloWater 가입" 
+            android:src="@drawable/ic_launcher"
+            />
+ 
+    </RelativeLayout>
+</LinearLayout>

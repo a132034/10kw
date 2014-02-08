@@ -15,7 +15,7 @@ public class LoadingActivity extends Activity{
 	public static final int LOADING_LOGON = 2;
 	public static final int LOADING_LOGOFF = 3;
 	
-	private int /*use = 0,*/ login_stat = 0;
+	private int use = 0, login_stat = 0;
 	
 	@SuppressLint("HandlerLeak")
 	@Override
@@ -28,19 +28,17 @@ public class LoadingActivity extends Activity{
 			
 			@Override
 			public void run() {
-//				if(use == 0){
-//					// 처음 사용자 - 설명? 무언가 들어갈 것? 
-//				}else{
-					if(login_stat == 0){ // log off
+
+				if(login_stat == 0){ // log off
 						Intent intent = new Intent(LoadingActivity.this, JoinActivity.class);
 						intent.putExtra("state", LOADING_LOGOFF);
 						startActivity(intent);
-					}else{ // log in 
+				}else{ // log in 
 						Intent intent = new Intent(LoadingActivity.this, MainActivity.class);
 						intent.putExtra("state", LOADING_LOGON);
 						startActivity(intent);
-					}
-				//}
+				}
+				
 				
 			}
 		}, 2000);

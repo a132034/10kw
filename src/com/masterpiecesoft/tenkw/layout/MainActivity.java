@@ -38,7 +38,7 @@ public class MainActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_drawer);
-		//startActivity(new Intent(this, LoadingActivity.class));
+		startActivity(new Intent(this, LoadingActivity.class));
 
 		mTitle = mDrawerTitle = getTitle();
 
