@@ -6,7 +6,7 @@
     
     
     <TextView
-        android:id="@+id/history_date"
+        android:id="@+id/record_date"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:gravity="center_vertical"
@@ -17,7 +17,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/history_km"
+        android:id="@+id/record_km"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:gravity="center_vertical|right"

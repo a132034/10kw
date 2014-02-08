@@ -25,7 +25,7 @@ public class TabPagerAdapter extends FragmentPagerAdapter{
 
 	@Override
 	public int getCount() {
-		return 4;//why??
+		return 4;
 	}
 
 	@Override
