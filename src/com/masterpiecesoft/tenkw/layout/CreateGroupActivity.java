@@ -14,8 +14,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -36,7 +34,6 @@ public class CreateGroupActivity extends Activity{
 	
 	private ImageButton leftBtn, rightBtn;
 	private ListView contactList;
-	private TextView mSearchTxt;
 	private Cursor cursor;
 	private static Uri contactURI = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
 	private final String SORTINGORDER = android.provider.ContactsContract.Contacts.DISPLAY_NAME + " COLLATE LOCALIZED ASC";
@@ -77,23 +74,6 @@ public class CreateGroupActivity extends Activity{
 			}// 확인 버튼 예정  ListView 의 Adapter 에서 선언한 checked[] 배열 이용해서 create table Db 가 실행되어야 한다. 레이아웃 깊이를 하나더 만들어야 할듯?
 		});
 		
-		mSearchTxt = (TextView)findViewById(R.id.member_search_txt);
-		mSearchTxt.addTextChangedListener(new TextWatcher() {
-			// 삭제 예정 , 검색 해보려고 했는데 왜안되는지 모르겠음 , 예제를 더 쳐다봐야 함.. 
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				cursor = getContentResolver().query(contactURI, item, android.provider.ContactsContract.Contacts.DISPLAY_NAME +"='"+s+"'", null, SORTINGORDER);
-			}
-			
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-			}
-			
-			@Override
-			public void afterTextChanged(Editable s) {				
-			}
-		});
 		// 주소록 가져오기
 		// DB접근 해서 정보 읽어옴 
 		cursor = getContentResolver().query(contactURI, item, null, null, SORTINGORDER);

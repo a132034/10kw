@@ -1,113 +1,190 @@
 package com.masterpiecesoft.tenkw.layout;
 
-import com.masterpiecesoft.tenkw.etc.*;
 import com.masterpiecesoft.tenkw.R;
-
+import com.masterpiecesoft.tenkw.DbManager.User;
+import com.masterpiecesoft.tenkw.etc.MainFragment;
+import com.masterpiecesoft.tenkw.etc.PersonalInfoAdapter;
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Toast;
-
 
 public class MainActivity extends FragmentActivity {
- 
-	private ImageButton StartBtn; // start btn 
-	private boolean mIsRunning;   // Running flag
-	private ListView personal;    // 사이드바 예정 
-	
-	private DrawerLayout mDrawerLayout; //사이드바 예정
-	private ActionBarDrawerToggle mDrawerToggle; //사이드바 예정
-	
-	private MainPagerAdapter mSectionsPagerAdapter;
-	private ViewPager mViewPager; 
-	
-	//for debug
-	private static final String TAG = "10kw";
-	
+	private DrawerLayout mDrawerLayout;
+	private ListView mDrawerList;
+	private ActionBarDrawerToggle mDrawerToggle;
+	private User personal;
+
+	// nav drawer title
+	private CharSequence mDrawerTitle;
+
+	// used to store app title
+	private CharSequence mTitle;
+
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		// mainActivity가 실행되면 startActivity를 통해 LoadingActivity가 시작됨
-		startActivity(new Intent(this, LoadingActivity.class));
-		
-		// activity 와 layout.xml 을 연결시켜 준다. 
-		setContentView(R.layout.activity_main);
-		final ActionBar actionBar = getActionBar();// actionBar 를 가져옴 
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD); //actionBar 3 가지 모드중 기본 ( title 만 보이는 것) 선택
+		setContentView(R.layout.activity_drawer);
+		//startActivity(new Intent(this, LoadingActivity.class));
 
-		mSectionsPagerAdapter = new MainPagerAdapter(getSupportFragmentManager()); // MainImage Swipe 를 돕는 Adapter
-		
-		mViewPager = (ViewPager)findViewById(R.id.Group_ImgBt);// layout 의 swipe 위치(pager 로 범위 지정)를 java 에서 다룰수 있게?연결
-		mViewPager.setAdapter(mSectionsPagerAdapter); //pager 에 adapter 연결 
-		
-		StartBtn = (ImageButton)findViewById(R.id.Running_Start_Btn);
-		StartBtn.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				if(mIsRunning){ // if start -> stop % stop -> start
-					mIsRunning = false;
-				}else{
-					mIsRunning = true;
-					Toast.makeText(getApplicationContext(), "start~", Toast.LENGTH_SHORT).show(); //for debug
-					//startService(new Intent(CopyOfMainActivity.this,StepService.class)); - 아마 만보기? 
-				}
-				
-			}
-		});
-	
-		mDrawerLayout = (DrawerLayout)findViewById(R.id.Main_Layout);
-		// drawer layout 은  slide menu 를 보다 쉽게 이용하기 위해서 사용 근데 다시 애니메이션으로 바꿀까 고민중
-		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.btn_addgroup, R.string.drawer_open, R.string.drawer_close){
+		mTitle = mDrawerTitle = getTitle();
 
-			@Override
-			public void onDrawerClosed(View drawerView) {
-				
-				super.onDrawerClosed(drawerView);
-			}
+		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+		mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
 
-			@Override
-			public void onDrawerOpened(View drawerView) {
-				
-				super.onDrawerOpened(drawerView);
-			}
-			
-		};
-		// 토글은 액션바 왼쪽에 현재 < 나와있는 것, < 모양을 다른 이미지로 바꾸고 그 버튼을 통해 drawer layout 제어하려 했으나 실패 
-		mDrawerLayout.setDrawerListener(mDrawerToggle);
+		// 임의데이터
+		personal = new User();
+		personal.setUserName("이경미");
+
+		PersonalInfoAdapter personlaInfo = new PersonalInfoAdapter(
+				getApplicationContext(), personal);
+		mDrawerList.setAdapter(personlaInfo);
+
+		final ActionBar actionBar = getActionBar();
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+
+		// enabling action bar app icon and behaving it as toggle button
 		actionBar.setDisplayHomeAsUpEnabled(true);
-	
+		actionBar.setHomeButtonEnabled(true);
+
+		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+				R.drawable.ic_drawer, R.string.app_name, R.string.app_name) {
+			public void onDrawerClosed(View view) {
+				actionBar.setTitle(mTitle);
+				// calling onPrepareOptionsMenu() to show action bar icons
+				invalidateOptionsMenu();
+			}
+
+			public void onDrawerOpened(View drawerView) {
+				actionBar.setTitle(mDrawerTitle);
+				// calling onPrepareOptionsMenu() to hide action bar icons
+				invalidateOptionsMenu();
+			}
+		};
+		mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+		if (savedInstanceState == null) {
+			// on first time display view for first nav item
+			displayView(0);
+		}
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.main_actionbar, menu);
 		return true;
-	}// 메뉴 버튼 눌렀을 때 나오는게 메뉴 인줄 알았는데 액션바에서는 메뉴를 액션바 오른쪽에 나타내는 것 같음 따라서 xml 에 item 추가하여 + 버튼 추가 
+	}// 메뉴 버튼 눌렀을 때 나오는게 메뉴 인줄 알았는데 액션바에서는 메뉴를 액션바 오른쪽에 나타내는 것 같음 따라서 xml 에 item
+		// 추가하여 + 버튼 추가
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch(item.getItemId()) // xml 로 정의한 버튼을 제어하는 곳  case 를 사용하여 누른 item 에 대한 일을 설정 , startactivity 는 activity 이동 앞에 loading 과 마찬가지
-		{
+		// Handle action bar actions click
+		switch (item.getItemId()) {
+//		case R.id.action_settings:
+//			break;
 		case R.id.action_create:
 			startActivity(new Intent(this, CreateGroupActivity.class));
 			break;
+		default:
+			return super.onOptionsItemSelected(item);
 		}
-		return super.onOptionsItemSelected(item);
+		return true;
+	}
+
+	/* *
+	 * Called when invalidateOptionsMenu() is triggered
+	 */
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		// if nav drawer is opened, hide the action items
+		//boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+		//menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
+		return super.onPrepareOptionsMenu(menu);
+	}
+
+	/**
+	 * Diplaying fragment view for selected nav drawer list item
+	 * */
+	private void displayView(int position) {
+		// update the main content by replacing fragments
+		Fragment fragment = null;
+		switch (position) {
+		case 0:
+			fragment = new MainFragment();
+			break;
+		case 1:
+			// fragment = new FindPeopleFragment();
+			break;
+		case 2:
+			// fragment = new PhotosFragment();
+			break;
+		case 3:
+			// fragment = new CommunityFragment();
+			break;
+		case 4:
+			// fragment = new PagesFragment();
+			break;
+		case 5:
+			// fragment = new WhatsHotFragment();
+			break;
+
+		default:
+			break;
+		}
+
+		if (fragment != null) {
+			FragmentManager fragmentManager = getSupportFragmentManager();
+			fragmentManager.beginTransaction()
+					.replace(R.id.frame_container, fragment).commit();
+
+			// update selected item and title, then close the drawer
+			// mDrawerList.setItemChecked(position, true);
+			// mDrawerList.setSelection(position);
+			// setTitle(navMenuTitles[position]);
+			mDrawerLayout.closeDrawer(mDrawerList);
+		} else {
+			// error in creating fragment
+			Log.e("MainActivity", "Error in creating fragment");
+		}
+	}
+
+	@Override
+	public void setTitle(CharSequence title) {
+		mTitle = title;
+		getActionBar().setTitle(mTitle);
+	}
+
+	/**
+	 * When using the ActionBarDrawerToggle, you must call it during
+	 * onPostCreate() and onConfigurationChanged()...
+	 */
+
+	@Override
+	protected void onPostCreate(Bundle savedInstanceState) {
+		super.onPostCreate(savedInstanceState);
+		// Sync the toggle state after onRestoreInstanceState has occurred.
+		mDrawerToggle.syncState();
+	}
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		// Pass any configuration change to the drawer toggls
+		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
 }

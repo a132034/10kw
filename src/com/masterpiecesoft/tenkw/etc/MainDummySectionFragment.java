@@ -25,7 +25,7 @@ public class MainDummySectionFragment extends Fragment{
 		// TODO Auto-generated method stub
 		
 		View rView = inflater.inflate(R.layout.maindummy_fragment, container, false);
-		// inflater 가 정확히 알지 못하지만 실행중인  Activity에 또다른 xml을 연결하기 위해선 필요한 작업 ..........?
+		// inflater 가 정확히 알지 못하지만 실행중인  Activity 에 또다른 xml을 연결하기 위해선 필요한 작업 ..........?
 		
 		ImageButton mGroupBtn = (ImageButton)rView.findViewById(R.id.GroupBtn);
 		mGroupBtn.setOnClickListener(new OnClickListener() {
