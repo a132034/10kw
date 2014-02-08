@@ -79,7 +79,7 @@ public class CreateGroupActivity extends Activity{
 		cursor = getContentResolver().query(contactURI, item, null, null, SORTINGORDER);
 		// 현재 모든 전화번호부 정보를 가져옴 그러나 우리 DB와 연동시켜서 겹치는 것만 가져오게 해야한다. 
 		// ListView Adapter , Cursor 사용에 편리한? 전용? ResourceCursorAdapter 상속받음 
-		ContactListItemAdapter contactListAdapt = new ContactListItemAdapter(this, R.layout.activity_creategroup_member, cursor);
+		ContactListItemAdapter contactListAdapt = new ContactListItemAdapter(this, R.layout.list_create_group_row, cursor);
 		contactList.setAdapter(contactListAdapt);
 		
 	}
@@ -101,7 +101,8 @@ public class CreateGroupActivity extends Activity{
 					.findViewById(R.id.create_item_phone_txt);
 			cache.photoView = (ImageView) view
 					.findViewById(R.id.create_item_image);
-			cache.checkBox = (CheckBox) view.findViewById(R.id.create_item_checkbox);
+			
+			cache.checkBox = (CheckBox)view.findViewById(R.id.create_item_checkbox);
 			
 			view.setTag(cache);
 			return view;

@@ -12,12 +12,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class PersonalInfoAdapter extends BaseAdapter{
+public class SlideListAdapter extends BaseAdapter{
 	
 	private Context context;
 	private User person;
 	
-	public PersonalInfoAdapter(Context context , User person){
+	public SlideListAdapter(Context context , User person){
 		this.context = context;
 		this.person = person;
 	}
@@ -51,37 +51,37 @@ public class PersonalInfoAdapter extends BaseAdapter{
 
         switch (position){
         case 0:
-        	convertView = mInflater.inflate(R.layout.list_imageview, null);
+        	convertView = mInflater.inflate(R.layout.list_image_row, null);
         	imgIcon= (ImageView) convertView.findViewById(R.id.personal_img);
         	break;
         case 1:
-        	convertView = mInflater.inflate(R.layout.list_textview, null);
+        	convertView = mInflater.inflate(R.layout.list_name_row, null);
             txtTitle = (TextView) convertView.findViewById(R.id.personal_list_txt);
             txtTitle.setText(person.getUserName());
         	break;
         case 2 :
-        	convertView = mInflater.inflate(R.layout.list_personal_info, null);
+        	convertView = mInflater.inflate(R.layout.list_slide_row, null);
         	imgIcon= (ImageView) convertView.findViewById(R.id.personal_img);
         	imgIcon.setImageResource(R.drawable.icon_home);
         	txtTitle = (TextView) convertView.findViewById(R.id.personal_list_txt);
         	txtTitle.setText("HOME");
         	break;
         case 3 :
-        	convertView = mInflater.inflate(R.layout.list_personal_info, null);
+        	convertView = mInflater.inflate(R.layout.list_slide_row, null);
         	imgIcon= (ImageView) convertView.findViewById(R.id.personal_img);
         	imgIcon.setImageResource(R.drawable.icon_my);
         	txtTitle = (TextView) convertView.findViewById(R.id.personal_list_txt);
         	txtTitle.setText("MY");
         	break;
         case 4 :
-        	convertView = mInflater.inflate(R.layout.list_personal_info, null);
+        	convertView = mInflater.inflate(R.layout.list_slide_row, null);
         	imgIcon= (ImageView) convertView.findViewById(R.id.personal_img);
         	imgIcon.setImageResource(R.drawable.icon_donation);
         	txtTitle = (TextView) convertView.findViewById(R.id.personal_list_txt);
         	txtTitle.setText("DONATION");
         	break;
         case 5 :
-        	convertView = mInflater.inflate(R.layout.list_personal_info, null);
+        	convertView = mInflater.inflate(R.layout.list_slide_row, null);
         	imgIcon= (ImageView) convertView.findViewById(R.id.personal_img);
         	imgIcon.setImageResource(R.drawable.icon_setting);
         	txtTitle = (TextView) convertView.findViewById(R.id.personal_list_txt);

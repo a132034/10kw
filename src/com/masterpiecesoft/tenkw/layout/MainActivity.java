@@ -3,7 +3,7 @@ package com.masterpiecesoft.tenkw.layout;
 import com.masterpiecesoft.tenkw.R;
 import com.masterpiecesoft.tenkw.DbManager.User;
 import com.masterpiecesoft.tenkw.etc.MainFragment;
-import com.masterpiecesoft.tenkw.etc.PersonalInfoAdapter;
+import com.masterpiecesoft.tenkw.etc.SlideListAdapter;
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
@@ -49,7 +49,7 @@ public class MainActivity extends FragmentActivity {
 		personal = new User();
 		personal.setUserName("¿Ã∞ÊπÃ");
 
-		PersonalInfoAdapter personlaInfo = new PersonalInfoAdapter(
+		SlideListAdapter personlaInfo = new SlideListAdapter(
 				getApplicationContext(), personal);
 		mDrawerList.setAdapter(personlaInfo);
 

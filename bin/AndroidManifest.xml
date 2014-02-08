@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="11"
-        android:targetSdkVersion="18" />
+        android:targetSdkVersion="15" />
 
     <!-- phone info. - group -->
     <uses-permission android:name="android.permission.READ_CONTACTS" />
