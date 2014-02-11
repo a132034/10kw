@@ -2,29 +2,67 @@ package com.masterpiecesoft.tenkw.layout;
 
 import com.masterpiecesoft.tenkw.R;
 import com.masterpiecesoft.tenkw.etc.*;
+import com.masterpiecesoft.tenkw.store.RunInfo;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageButton;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 
 public class GroupActivity extends FragmentActivity implements ActionBar.TabListener{
 
 	private TabPagerAdapter mTabPagerAdapter;
 	private ViewPager mViewPager;
-	
+	private boolean mIsRunning;
+	private RunInfo runInfo = new RunInfo();
+	private ImageButton strBtn;
+	private int groupID;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.activity_group);
-		
+
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		actionBar.setDisplayHomeAsUpEnabled(true);
+
+		strBtn = (ImageButton)findViewById(R.id.main_start_btn);
+		
+		Intent intent = getIntent();
+		groupID = intent.getIntExtra("GroupID", 1);
+		Log.d("group","groupID     "+groupID);
+		Log.d("group","getID     "+runInfo.getGroupID());
+		if(/*mIsRunning &&*/ runInfo.getGroupID() == groupID ){
+			strBtn.setBackgroundResource(R.drawable.btn_stop);
+		}else{
+			strBtn.setBackgroundResource(R.drawable.btn_start);
+		}
+		
+		strBtn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+
+				if(/*mIsRunning &&*/ runInfo.getGroupID() == groupID ){
+					// 켜져 잇을 때 누른거라서 stop 시키면 된다. 
+					strBtn.setBackgroundResource(R.drawable.btn_start);
+				}else{
+					// 시작하기 위해서 누른것 이므로 기존에 시작중인지 잘 확인하고 실행 시킬 수 있도록 해야한다. 
+					strBtn.setBackgroundResource(R.drawable.btn_stop);
+					runInfo.setGroupID(groupID);
+				}
+			}
+		});
 		
 		mTabPagerAdapter = new TabPagerAdapter(getSupportFragmentManager());
 		

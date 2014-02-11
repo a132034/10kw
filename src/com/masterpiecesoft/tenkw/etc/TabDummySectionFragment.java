@@ -4,12 +4,20 @@ import com.masterpiecesoft.tenkw.R;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import com.echo.holographlibrary.Line;
+import com.echo.holographlibrary.LineGraph;
+import com.echo.holographlibrary.LinePoint;
+
 
 public class TabDummySectionFragment extends Fragment{
 
@@ -50,16 +58,41 @@ public class TabDummySectionFragment extends Fragment{
 	}
 	
 	private View addedFriendPage(View view){
+		
+		Cursor cursor = null ; 
 		ListView rankList = (ListView)view.findViewById(R.id.add_friends_list);
-		GroupRankAdapter adapter = new GroupRankAdapter(getActivity(),R.layout.list_rank_row, Cursor c);
+		GroupRankAdapter adapter = new GroupRankAdapter(getActivity(),R.layout.list_rank_row, cursor);
 		rankList.setAdapter(adapter);
+		
 		return view;
 	}
 	
 	private View graphPage(View view){
+		
+		Cursor cursor = null ; 
 		ListView record = (ListView)view.findViewById(R.id.graph_list);
-		GroupRecordAdapter adapter = new GroupRecordAdapter(getActivity(),R.layout.list_record_row, Cursor c);
+		GroupRecordAdapter adapter = new GroupRecordAdapter(getActivity(),R.layout.list_record_row, cursor);
 		record.setAdapter(adapter);
+		
+		// y max 는 4 까지만 표현하자 나눠서 곱하기 ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ 리사이즈가 안됨 왜 안되는지 모르겠음 
+				Line line = new Line();
+				LinePoint p = new LinePoint();
+				p.setX(0);
+				p.setY(1);
+				line.addPoint(p);
+				
+				p = new LinePoint();
+				p.setX(1);
+				p.setY(1);
+				line.addPoint(p);
+				
+				line.setColor(Color.parseColor("#FFBB33"));
+				
+				LineGraph lineGraph = (LineGraph)view.findViewById(R.id.graph_graph);
+				lineGraph.addLine(line);
+				lineGraph.setRangeY(0,5);
+				lineGraph.setLineToFill(0);
+				
 		return view;
 	}
 	
