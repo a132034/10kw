@@ -5,50 +5,60 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="14"
         android:targetSdkVersion="15" />
 
     <!-- phone info. - group -->
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    
+
     <!-- gps speed check -->
-    <uses-permission android:name="android.permission.INTERNET" /> 
-	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    
-    
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/CustomActionBar">
         <activity
             android:name="com.masterpiecesoft.tenkw.layout.GroupActivity"
-            android:label="@string/title_activity_group" >
+            android:label="" >
         </activity>
         <activity
             android:name="com.masterpiecesoft.tenkw.layout.LoadingActivity"
-            android:label="@string/title_activity_loading" >
+            android:label=""
+            android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
             android:name="com.masterpiecesoft.tenkw.layout.CreateGroupActivity"
-            android:label="@string/title_activity_create_group" >
+            android:label="" >
         </activity>
         <activity
             android:name="com.masterpiecesoft.tenkw.layout.JoinActivity"
-            android:label="@string/title_activity_join" 
-            android:theme="@android:style/Theme.Black.NoTitleBar">
+            android:label=""
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
-        <activity android:name="com.masterpiecesoft.tenkw.layout.MainActivity">
+        <activity android:name="com.masterpiecesoft.tenkw.layout.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
+
+        <service android:name="com.masterpiecesoft.tenkw.pedometer.StepService" >
+        </service>
+        <activity
+            android:name="com.masterpiecesoft.tenkw.layout.LoginActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.masterpiecesoft.tenkw.CreateTeamActivity"
+            android:label="" >
+        </activity>
     </application>
 
 </manifest>

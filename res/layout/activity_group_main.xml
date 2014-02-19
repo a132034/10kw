@@ -1,37 +1,85 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/personal_relative_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:paddingBottom="30dp"
     tools:context=".PersonalInfo" >
- <TextView
-        android:id="@+id/detail_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="TextView" />
 
- <TextView
-     android:id="@+id/textView1"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:layout_alignLeft="@+id/detail_txt"
-     android:layout_below="@+id/detail_txt"
-     android:layout_marginTop="20dp"
-     android:text="TextView" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp" 
+    android:layout_weight="5.5">
 
- <ImageView
-     android:id="@+id/imageView1"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:layout_alignParentTop="true"
-     android:layout_centerHorizontal="true"
-     android:layout_marginTop="99dp"
-     android:src="@drawable/ic_launcher" />
+    <ImageView
+        android:id="@+id/group_main_image"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
+</LinearLayout>
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_weight="1"
+        android:background="#f3f2ee" >
+
+        <TextView
+            android:id="@+id/group_main_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Large Text"
+            android:layout_weight="7"
+            
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_gravity = "center"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/group_main_num"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="Large"
+            
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+              android:layout_gravity = "center"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6"
+            android:background="@drawable/bg_info2" 
+            android:layout_marginTop="3dp">
+    
+    <com.echo.holographlibrary.PieGraph
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="5"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:id="@+id/graph1"/>
+    
+        <com.echo.holographlibrary.PieGraph
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="5"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:id="@+id/graph2"/>
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_info4"
+            android:orientation="vertical" >
+
+        </LinearLayout>
+
+</LinearLayout>

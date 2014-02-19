@@ -3,7 +3,7 @@
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#aaaaaa"
+    android:background="#f3f2ee"
     android:orientation="vertical"
     android:visibility="visible"
     tools:context=".MainFragment" >
@@ -15,7 +15,6 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_weight="5"
-        android:background="@drawable/btn_main_stroke"
         android:gravity="center" >
     </android.support.v4.view.ViewPager>
 
@@ -23,62 +22,84 @@
         android:id="@+id/main_box_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
         android:layout_weight="3"
+        android:layout_marginLeft="35dp"
+        
+        android:layout_marginRight="35dp"
         android:background="@drawable/bt_main_box"
         android:orientation="vertical" 
         android:layout_gravity="center">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:gravity="center" >
+            android:layout_height="0dp"
+             android:layout_weight="1"
+            android:layout_marginTop="20dp" >
 
             <TextView
                 android:id="@+id/main_title_txt"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:gravity="center"
                 android:text="SGEN CLUB"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="@dimen/text_30sp" />
 
             <TextView
                 android:id="@+id/main_num_txt"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:layout_weight="1"
                 android:text="N명"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="@dimen/text_25sp" />
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
+            android:layout_height="0dp"
             android:gravity="center"
+             android:layout_weight="3"
             android:orientation="vertical" 
             android:layout_gravity="center">
 
             <TextView
                 android:id="@+id/main_percent_txt"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:text="TextView"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                 android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="@dimen/text_25sp" />
+
+<ProgressBar
+                android:id="@+id/main_percent_progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="wrap_content"
+                 android:layout_weight="1"
+                android:layout_height="0dp" />
 
             <TextView
                 android:id="@+id/main_km_txt"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                 android:layout_weight="1"
                 android:text="TextView"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="@dimen/text_20sp" />
 
-            <ProgressBar
-                android:id="@+id/main_percent_progress"
-                style="?android:attr/progressBarStyleHorizontal"
+            <TextView
+                android:id="@+id/main_steps_temptxt"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="@dimen/text_20sp" />
+            
         </LinearLayout>
     </LinearLayout>
 
@@ -87,10 +108,9 @@
         android:layout_width="match_parent"
         android:layout_gravity="center"
         android:layout_height="0dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        
-                android:layout_marginBottom="5dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+                android:layout_marginBottom="10dp"
         android:layout_weight="0.9"
         android:background="@drawable/btn_start" />
 

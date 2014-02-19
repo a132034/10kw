@@ -8,8 +8,11 @@ package com.echo.holographlibrary;
 
 public final class R {
 	public static final class drawable {
-		public static final int ic_launcher = 0x7f02000e;
-		public static final int popup_black = 0x7f02001c;
+		public static final int appicon2 = 0x7f020000;
+		public static final int btn_cancel = 0x7f020017;
+		public static final int btn_done2 = 0x7f020019;
+		public static final int ic_launcher = 0x7f020024;
+		public static final int popup_black = 0x7f020032;
 	}
 	public static final class string {
 		public static final int app_name = 0x7f050000;

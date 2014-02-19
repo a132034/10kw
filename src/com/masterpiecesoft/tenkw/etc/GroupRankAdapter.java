@@ -1,60 +1,95 @@
 package com.masterpiecesoft.tenkw.etc;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.masterpiecesoft.tenkw.R;
+import com.masterpiecesoft.tenkw.DbManager.User;
+import com.masterpiecesoft.tenkw.store.TeamUserInfo;
+
+import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.widget.ResourceCursorAdapter;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class GroupRankAdapter extends ResourceCursorAdapter {
+public class GroupRankAdapter extends BaseAdapter {
 
-	public GroupRankAdapter(Context context, int layout, Cursor c) {
-		super(context, layout, c);
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public View newView(Context context, Cursor cursor, ViewGroup parent){
-		
-		View view = super.newView(context, cursor, parent);
-		
-		GroupRankItemCache cache = new GroupRankItemCache();
-		cache.nameView = (TextView)view.findViewById(R.id.member_name);
-		cache.kmView = (TextView)view.findViewById(R.id.member_km);
-		cache.imageView = (ImageView)view.findViewById(R.id.member_img);
-		
-		view.setTag(cache);
-		return view;
-	}
-	@Override
-	public void bindView(View view, Context context, Cursor cursor) {
-		// TODO Auto-generated method stub
-		float stepSize = 0.2f;
-		GroupRankItemCache cache = (GroupRankItemCache)view.getTag();
-		TextView nameView = cache.nameView;
-		TextView kmView = cache.kmView;
-		ImageView imageView = cache.imageView;
-		
-		int nameidx = cursor.getColumnIndex("username");
-		String name = cursor.getString(nameidx);
-		nameView.setText(name);
-		
-		int kmidx = cursor.getColumnIndex("total");
-		int km = cursor.getInt(kmidx);
-		kmView.setText(""+km*stepSize);
-		
-		//사진 생략했음
-	}
+	private List<TeamUserInfo> userList;
+	private Context context;
 	
-	public final class GroupRankItemCache {
-		ImageView imageView;
-		TextView nameView;
-		TextView kmView;
+	public GroupRankAdapter (Context context , List<TeamUserInfo> teamUserList){
+		this.userList = teamUserList;
+		this.context = context;
 	}
+	@Override
+	public int getCount() {
+		// TODO Auto-generated method stub
+		return userList.size();
+	}
+
+	@Override
+	public Object getItem(int arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public long getItemId(int arg0) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		// TODO Auto-generated method stub
+		
+		ImageView imageView; 
+		TextView UserName;
+		TextView UserSubStep;
+		
+		if ( convertView == null ){
+			 LayoutInflater mInflater = (LayoutInflater)
+	                    context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+			 convertView = mInflater.inflate(R.layout.list_rank_row, null);
+		}
+	
+		UserName = (TextView)convertView.findViewById(R.id.member_name);
+		UserSubStep = (TextView)convertView.findViewById(R.id.member_km);
+		imageView = (ImageView)convertView.findViewById(R.id.member_img);
+		
+		TeamUserInfo temp = userList.get(position);
+		
+		UserName.setText(temp.getName());
+		UserSubStep.setText(""+temp.getSubStep());
+		
+		if(userList.size()==4){
+			switch (position){
+			case 1:
+				imageView.setBackgroundResource(R.drawable.untitled4);
+				break;
+			case 2:
+				imageView.setBackgroundResource(R.drawable.untitled1);
+				break;
+			case 3:
+				imageView.setBackgroundResource(R.drawable.untitled2);
+				break;
+			case 0:
+				imageView.setBackgroundResource(R.drawable.untitled3);
+				break;
+			}
+		}
+	/*	*/
+		return convertView;    
+	}
+
+	
 
 }
 

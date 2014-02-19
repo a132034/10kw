@@ -10,7 +10,7 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="20dp"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/icon_profile" />
 
     <TextView
         android:id="@+id/create_item_phone_txt"

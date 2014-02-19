@@ -1,14 +1,14 @@
 package com.masterpiecesoft.tenkw.layout;
 
+import com.masterpiecesoft.tenkw.CreateTeamActivity;
 import com.masterpiecesoft.tenkw.R;
 import com.masterpiecesoft.tenkw.DbManager.User;
 import com.masterpiecesoft.tenkw.etc.MainFragment;
 import com.masterpiecesoft.tenkw.etc.SlideListAdapter;
+import com.masterpiecesoft.tenkw.pedometer.PedometerSettings;
+import com.masterpiecesoft.tenkw.pedometer.StepService;
+import com.masterpiecesoft.tenkw.pedometer.Utils;
 
-import name.bagi.levente.pedometer.Pedometer;
-import name.bagi.levente.pedometer.PedometerSettings;
-import name.bagi.levente.pedometer.StepService;
-import name.bagi.levente.pedometer.Utils;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -19,7 +19,6 @@ import android.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
@@ -39,26 +38,16 @@ public class MainActivity extends FragmentActivity {
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
 	private User personal;
-	private StepService mService;
+	///////////////////////////////////
+	String TAG = "TAG";
 	
-	//pedometer
-	private Utils mUtils;
-	private SharedPreferences mSettings;
-	private PedometerSettings mPedometerSettings;
-	private boolean mIsRunning;
-	
-	private int mStepValue;
-    private int mPaceValue;
-    private float mDistanceValue;
-    private float mSpeedValue;
-    private int mCaloriesValue;
-    private float mDesiredPaceOrSpeed;
-    private int mMaintain;
-    private boolean mIsMetric;
-    private float mMaintainInc;
-    private boolean mQuitting = false;
-	
+	///////////////////////////////////
+	public static final int FIRST_USE = 0;
+	public static final int LOGON = 2;
+	public static final int LOGOFF = 3;
+	private int login_state = 0;
 
+	//////////////////////////////////
 	// nav drawer title
 	private CharSequence mDrawerTitle;
 
@@ -69,8 +58,16 @@ public class MainActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		startActivity(new Intent(this, LoadingActivity.class));
 		setContentView(R.layout.activity_drawer);
-		//startActivity(new Intent(this, LoadingActivity.class));
+		
+////
+		////
+		Intent in = getIntent();
+		login_state = in.getIntExtra("login_state",0);
+			
+		if(login_state == FIRST_USE)
+			startActivity(new Intent(this, LoadingActivity.class));
 
 		mTitle = mDrawerTitle = getTitle();
 
@@ -87,7 +84,6 @@ public class MainActivity extends FragmentActivity {
 
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-
 		// enabling action bar app icon and behaving it as toggle button
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setHomeButtonEnabled(true);
@@ -112,8 +108,6 @@ public class MainActivity extends FragmentActivity {
 			// on first time display view for first nav item
 			displayView(0);
 		}
-		
-		mUtils = Utils.getInstance();
 	}
 
 	@Override
@@ -123,15 +117,17 @@ public class MainActivity extends FragmentActivity {
 		return true;
 	}// 메뉴 버튼 눌렀을 때 나오는게 메뉴 인줄 알았는데 액션바에서는 메뉴를 액션바 오른쪽에 나타내는 것 같음 따라서 xml 에 item
 		// 추가하여 + 버튼 추가
-
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar actions click
+		if (mDrawerToggle.onOptionsItemSelected(item)) {
+			return true;
+		}
 		switch (item.getItemId()) {
-//		case R.id.action_settings:
-//			break;
+		case R.id.action_settings:
+			break;
 		case R.id.action_create:
-			startActivity(new Intent(this, CreateGroupActivity.class));
+			startActivity(new Intent(MainActivity.this, CreateTeamActivity.class));
 			break;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -139,72 +135,6 @@ public class MainActivity extends FragmentActivity {
 		return true;
 	}
 
-	/* *
-	 * Called when invalidateOptionsMenu() is triggered
-	 */
-	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
-		// if nav drawer is opened, hide the action items
-		//boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-		//menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
-		return super.onPrepareOptionsMenu(menu);
-	}
-	
-	@Override
-	protected void onResume(){
-		super.onResume();
-		
-		mSettings = PreferenceManager.getDefaultSharedPreferences(this);
-        mPedometerSettings = new PedometerSettings(mSettings);
-        
-        mIsRunning = mPedometerSettings.isServiceRunning();
-		
-		if(mIsRunning && mPedometerSettings.isNewStart()){
-			//startStepService();
-			//bindStepService();
-		}else if(mIsRunning){
-			//bindStepService();
-		}
-		
-		mPedometerSettings.clearServiceRunning();
-		
-		// textView연결 및 
-		
-		displayDesiredPaceOrSpeed();
-	}
-	private void displayDesiredPaceOrSpeed() {
-        if (mMaintain == PedometerSettings.M_PACE) {
-       //     mDesiredPaceView.setText("" + (int)mDesiredPaceOrSpeed);
-        }
-        else {
-      //      mDesiredPaceView.setText("" + mDesiredPaceOrSpeed);
-        }
-    }
-    
-	@Override
-	protected void onPause(){
-		if(mIsRunning){
-			//unbindStepService();
-		}
-		if (mQuitting) {
-            mPedometerSettings.saveServiceRunningWithNullTimestamp(mIsRunning);
-        }
-        else {
-            mPedometerSettings.saveServiceRunningWithTimestamp(mIsRunning);
-        }
-		
-		super.onPause();
-		savePaceSetting();
-	}
-	
-	private void savePaceSetting() {
-        mPedometerSettings.savePaceOrSpeedSetting(mMaintain, mDesiredPaceOrSpeed);
-    }
-	
-
-	/**
-	 * Diplaying fragment view for selected nav drawer list item
-	 * */
 	private void displayView(int position) {
 		// update the main content by replacing fragments
 		Fragment fragment = null;
@@ -215,19 +145,6 @@ public class MainActivity extends FragmentActivity {
 		case 1:
 			// fragment = new FindPeopleFragment();
 			break;
-		case 2:
-			// fragment = new PhotosFragment();
-			break;
-		case 3:
-			// fragment = new CommunityFragment();
-			break;
-		case 4:
-			// fragment = new PagesFragment();
-			break;
-		case 5:
-			// fragment = new WhatsHotFragment();
-			break;
-
 		default:
 			break;
 		}
@@ -254,11 +171,6 @@ public class MainActivity extends FragmentActivity {
 		getActionBar().setTitle(mTitle);
 	}
 
-	/**
-	 * When using the ActionBarDrawerToggle, you must call it during
-	 * onPostCreate() and onConfigurationChanged()...
-	 */
-
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
@@ -272,126 +184,7 @@ public class MainActivity extends FragmentActivity {
 		// Pass any configuration change to the drawer toggls
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
-	
-	 private ServiceConnection mConnection = new ServiceConnection() {
-	        public void onServiceConnected(ComponentName className, IBinder service) {
-	            mService = ((StepService.StepBinder)service).getService();
 
-	            mService.registerCallback(mCallback);
-	            mService.reloadSettings();
-	            
-	        }
-
-	        public void onServiceDisconnected(ComponentName className) {
-	            mService = null;
-	        }
-	    };
-	    
-
-	
-    private void startStepService() {
-        if (! mIsRunning) {
-            mIsRunning = true;
-            startService(new Intent(MainActivity.this,
-                    StepService.class));
-        }
-    }
-    
-    private void bindStepService() {
-        bindService(new Intent(MainActivity.this, 
-                StepService.class), mConnection, Context.BIND_AUTO_CREATE + Context.BIND_DEBUG_UNBIND);
-    }
-
-    private void unbindStepService() {
-        unbindService(mConnection);
-    }
-    
-    private void stopStepService() {
-        if (mService != null) {
-            stopService(new Intent(MainActivity.this,
-                  StepService.class));
-        }
-        mIsRunning = false;
-    }
-    
-
-    private StepService.ICallback mCallback = new StepService.ICallback() {
-        public void stepsChanged(int value) {
-            mHandler.sendMessage(mHandler.obtainMessage(STEPS_MSG, value, 0));
-        }
-        public void paceChanged(int value) {
-            mHandler.sendMessage(mHandler.obtainMessage(PACE_MSG, value, 0));
-        }
-        public void distanceChanged(float value) {
-            mHandler.sendMessage(mHandler.obtainMessage(DISTANCE_MSG, (int)(value*1000), 0));
-        }
-        public void speedChanged(float value) {
-            mHandler.sendMessage(mHandler.obtainMessage(SPEED_MSG, (int)(value*1000), 0));
-        }
-        public void caloriesChanged(float value) {
-            mHandler.sendMessage(mHandler.obtainMessage(CALORIES_MSG, (int)(value), 0));
-        }
-    };
-    
-
-    private static final int STEPS_MSG = 1;
-    private static final int PACE_MSG = 2;
-    private static final int DISTANCE_MSG = 3;
-    private static final int SPEED_MSG = 4;
-    private static final int CALORIES_MSG = 5;
-    
-    private Handler mHandler = new Handler() {
-        @Override public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case STEPS_MSG:
-                    mStepValue = (int)msg.arg1;
-                //    mStepValueView.setText("" + mStepValue);
-                    break;
-                case PACE_MSG:
-                    mPaceValue = msg.arg1;
-                    if (mPaceValue <= 0) { 
-               //         mPaceValueView.setText("0");
-                    }
-                    else {
-               //         mPaceValueView.setText("" + (int)mPaceValue);
-                    }
-                    break;
-                case DISTANCE_MSG:
-                    mDistanceValue = ((int)msg.arg1)/1000f;
-                    if (mDistanceValue <= 0) { 
-                //        mDistanceValueView.setText("0");
-                    }
-                    else {
-             //           mDistanceValueView.setText(
-               //                 ("" + (mDistanceValue + 0.000001f)).substring(0, 5)
-                 //       );
-                    }
-                    break;
-                case SPEED_MSG:
-                    mSpeedValue = ((int)msg.arg1)/1000f;
-                    if (mSpeedValue <= 0) { 
-                   //     mSpeedValueView.setText("0");
-                    }
-                    else {
-                    //    mSpeedValueView.setText(
-                        //        ("" + (mSpeedValue + 0.000001f)).substring(0, 4)
-                      //  );
-                    }
-                    break;
-                case CALORIES_MSG:
-                    mCaloriesValue = msg.arg1;
-                    if (mCaloriesValue <= 0) { 
-               //         mCaloriesValueView.setText("0");
-                    }
-                    else {
-                 //       mCaloriesValueView.setText("" + (int)mCaloriesValue);
-                    }
-                    break;
-                default:
-                    super.handleMessage(msg);
-            }
-        }
-        
-    };
+////////////////////////////////////////////////////////////////////
 
 }

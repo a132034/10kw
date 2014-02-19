@@ -2,21 +2,41 @@ package com.masterpiecesoft.tenkw.store;
 
 public final class RunInfo {
 	
-	private static int GroupID ;
-	private static int UserID ;
+	private boolean mIsRunning;
+	private static int groupIndex ;
+	private static int beforeStepNum;
+	private static int tabIndex;
 	
-	public int getGroupID() {
-		return GroupID;
+	public int getBeforeStepNum() {
+		return beforeStepNum;
 	}
-	public void setGroupID(int groupID) {
-		GroupID = groupID;
+	
+	public void setBeforeStepNum(int beforeStepNum) {
+		this.beforeStepNum = beforeStepNum;
 	}
-	public int getUserID() {
-		return UserID;
+	public boolean getmIsRunning() {
+		return mIsRunning;
 	}
-	public void setUserID(int userID) {
-		UserID = userID;
+	public void setmIsRunning(boolean mIsRunning) {
+		this.mIsRunning = mIsRunning;
 	}
+
+	public static int getGroupIndex() {
+		return groupIndex;
+	}
+
+	public static void setGroupIndex(int groupIndex) {
+		RunInfo.groupIndex = groupIndex;
+	}
+
+	public static int getTabIndex() {
+		return tabIndex;
+	}
+
+	public static void setTabIndex(int tabIndex) {
+		RunInfo.tabIndex = tabIndex;
+	}
+	
 	
 
 }
