@@ -22,7 +22,6 @@
 
     <!-- pedometer -->
 
-    <string name="app_name">Pedometer</string>
     <string name="notification_subtitle">Counting your steps</string>
     <string name="started">Pedometer started.</string>
     <string name="stopped">Pedometer stopped.</string>

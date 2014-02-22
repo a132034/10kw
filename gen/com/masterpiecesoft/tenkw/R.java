@@ -234,16 +234,6 @@ public final class R {
     public static final class string {
         public static final int action_settings=0x7f050001;
         public static final int activity_settings=0x7f05001d;
-        /** 
-    Tab title
-    <string name="tab_title_section1">Detail View</string>
-    <string name="tab_title_section2">Friends</string>
-    <string name="tab_title_section3">Graph</string>
-    <string name="tab_title_section4">Calendar</string>
-
-    
- pedometer 
-         */
         public static final int app_name=0x7f050000;
         public static final int body_weight_setting=0x7f050039;
         public static final int body_weight_setting_details=0x7f05003a;
@@ -288,6 +278,16 @@ public final class R {
         public static final int medium=0x7f050026;
         public static final int miles=0x7f05000e;
         public static final int miles_per_hour=0x7f050011;
+        /** 
+    Tab title
+    <string name="tab_title_section1">Detail View</string>
+    <string name="tab_title_section2">Friends</string>
+    <string name="tab_title_section3">Graph</string>
+    <string name="tab_title_section4">Calendar</string>
+
+    
+ pedometer 
+         */
         public static final int notification_subtitle=0x7f050009;
         public static final int operation_level_setting=0x7f05002b;
         public static final int operation_level_setting_details=0x7f05002c;
