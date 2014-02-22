@@ -87,6 +87,8 @@ public class SlideListAdapter extends BaseAdapter{
         	txtTitle = (TextView) convertView.findViewById(R.id.personal_list_txt);
         	txtTitle.setText("SETTING");
         	break;
+        	default:
+        		break;
         }
         
         convertView.setBackgroundResource(R.drawable.personal_list_bg);

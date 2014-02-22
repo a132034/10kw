@@ -16,8 +16,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/personal_img"
         android:layout_marginLeft="10dp"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_toRightOf="@+id/personal_img"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#555555"
+        android:textSize="20sp" />
 
 </RelativeLayout>

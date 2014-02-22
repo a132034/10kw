@@ -2,6 +2,11 @@
 <resources>
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
-    <color name="actionbar_background">#000077</color>
+    <color name="actionbar_background">#35aadc</color>
     
+    <color name="screen_background">#333</color>
+    <color name="display_background">#000</color>
+    
+    <color name="tab_back">#f9f9f7</color>
+    <color name="tab_back_clicked">#fff</color>
 </resources>

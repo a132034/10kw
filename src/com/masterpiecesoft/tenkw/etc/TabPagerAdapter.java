@@ -10,8 +10,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class TabPagerAdapter extends FragmentPagerAdapter{
 
-	public TabPagerAdapter(FragmentManager fm) {
+	private int index ;
+	
+	public TabPagerAdapter(FragmentManager fm , int index) {
 		super(fm);
+		this.index = index;
 	}
 
 	@Override
@@ -25,7 +28,7 @@ public class TabPagerAdapter extends FragmentPagerAdapter{
 
 	@Override
 	public int getCount() {
-		return 4;//why??
+		return 4;
 	}
 
 	@Override

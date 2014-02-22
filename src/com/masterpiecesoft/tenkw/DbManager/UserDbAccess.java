@@ -109,6 +109,43 @@ public class UserDbAccess {
 				return 0;
 			}
 		}
+		public int LoginUser(User _user){
+			StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().
+					detectDiskReads().detectDiskWrites().detectNetwork().penaltyLog().build());
+			StringBuilder sb = new StringBuilder();
+			try {
+				// url 주소 + 입력값
+				Log.e("db connection", "db ㅅㅂ...");
+				URL url = new URL("http://117.16.47.4/db.10kw/login.php?"
+						+ "userphone=" + URLEncoder.encode(_user.getUserPhone(), "UTF-8")
+						+ "&userpasswd=" + URLEncoder.encode(_user.getUserPasswd(), "UTF-8"));
+				Log.e("10kw", "login php failed");
+				HttpURLConnection conn = db.getConnection(url);
+
+				if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+					BufferedReader br = new BufferedReader(new InputStreamReader(
+							conn.getInputStream()));
+					String line = br.readLine();
+					sb.append(line);
+					br.close();
+					conn.disconnect();
+					if(sb.toString().equals("true")){
+						Log.d("10kw", "addUserInfo");
+						return 1;
+					}
+					else
+						return 0;
+				} else {
+					conn.disconnect();
+					Log.e("10kw", "login_user-Connection Error in AddUser Func()");
+					return 0;
+				}
+			} catch (Exception e) {
+				Log.e("10kw", "login_user - try Error in AddUser Func()" + e);
+				return 0;
+			}
+			
+		}
 		public int CreateTeam(User ..._user){
 			StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().
 					detectDiskReads().detectDiskWrites().detectNetwork().penaltyLog().build());

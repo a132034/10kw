@@ -16,5 +16,34 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
+    
+    
+        <style name="CustomWindowTitleBackground">
+        <item name="android:background">#323331</item>
+    </style>
+
+    <style name="CustomTitle" parent="android:Theme">
+        <item name="android:windowTitleSize">45dp</item>
+        <item name="android:windowTitleBackgroundStyle">@style/CustomWindowTitleBackground</item>
+    </style>
+    
+    
+    
+        <!-- 여기가 custom actionbar background 설정 -->
+    <style name="CustomActionBarBackground" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+       <item name="android:background">@color/actionbar_background</item>  
+    </style>
+    
+    <style name="CustomActionBarTabs"
+           parent="@android:style/Widget.Holo.ActionBar.TabView">
+        <!-- tab indicator -->
+        <item name="android:background">@drawable/tab_background</item>
+    </style>
+
+    <style name="CustomActionBar" parent="@android:style/Theme.Holo.Light.DarkActionBar">
+       <item name="android:actionBarStyle">@style/CustomActionBarBackground</item> 
+       <item name="android:actionBarTabStyle">@style/CustomActionBarTabs</item>
+    </style>
+    
 
 </resources>
