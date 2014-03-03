@@ -12,7 +12,7 @@ public class Team {
 	
 	public Team(String TeamTitle){
 		userList = new ArrayList<TeamUserInfo>();
-		userList.add(new TeamUserInfo("¿Ã∞ÊπÃ",0));
+		userList.add(new TeamUserInfo(UserInfo.getName(),0));
 		this.TeamTitle = TeamTitle;
 	}
 	

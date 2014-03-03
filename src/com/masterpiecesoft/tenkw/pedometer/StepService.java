@@ -367,7 +367,7 @@ public class StepService extends Service {
     // 상단에 그 알림 창  알림 메세지  ?
     private void showNotification() {
         CharSequence text = getText(R.string.app_name);
-        Notification notification = new Notification(R.drawable.ic_notification, null,
+        Notification notification = new Notification(R.drawable.appicon2, null,
                 System.currentTimeMillis());
         notification.flags = Notification.FLAG_NO_CLEAR | Notification.FLAG_ONGOING_EVENT;
         Intent pedometerIntent = new Intent();

@@ -5,9 +5,9 @@ import java.util.List;
 
 public final class UserInfo {
 	
-	private static String Name;
-	private static int Height;
-	private static int Weight;
+	private static String Name="¿Ã∞ÊπÃ";
+	private static String Height;
+	private static String Weight;
 	private static List<Team> teamList;
 	
 
@@ -40,18 +40,24 @@ public final class UserInfo {
 		}
 	}
 	
-	public static int getHeight() {
+	public static String getHeight() {
 		return Height;
 	}
-	public static void setHeight(int height) {
+	public static void setHeight(String height) {
 		Height = height;
 	}
-	public static int getWeight() {
+	public static String getWeight() {
 		return Weight;
 	}
-	public static void setWeight(int weight) {
+	public static void setWeight(String weight) {
 		Weight = weight;
 	}
 	
+	public static int getUserTotalStep(){
+		int temp = 0;
+		for(int i = 0 ; i < teamList.size() ; i++)
+			temp += teamList.get(i).getUserList().get(0).getSubStep();
+		return temp;
+	}
 	
 }

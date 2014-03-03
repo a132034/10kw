@@ -91,8 +91,7 @@ public class TabDummySectionFragment extends Fragment {
 		
 		ImageButton imgBtn = (ImageButton) view.findViewById(R.id.imageButton1);
 		TextView txt = (TextView)view.findViewById(R.id.textView1);
-		txt.setText(userInfo.getTeamList().get(runInfo
-				.getTabIndex()).getTeamTitle());
+		txt.setText(userInfo.getTeamList().get(runInfo.getTabIndex()).getTeamTitle());
 		imgBtn.setOnClickListener(new OnClickListener(){
 
 			@Override
